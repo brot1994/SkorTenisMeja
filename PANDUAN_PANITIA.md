@@ -84,6 +84,22 @@ Buka link **Panitia / admin**.
 
 Beberapa admin boleh membuka halaman panitia bersamaan. Perubahan langsung terlihat di semua perangkat.
 
+### Mengganti pemain (ada yang tidak bisa datang)
+
+**A. Hanya untuk satu pertandingan**, pemain pengganti sudah ada di daftar tim:
+- Saat **Mulai**, pilih nama lain di form **Susunan pemain**.
+- Kalau partai sudah berjalan, ganti di baris pilihan pemain di bawah tab partai. Skor tidak hilang.
+
+**B. Mengganti atau menambah orang di daftar tim**, misalnya ada pemain baru yang belum terdaftar:
+1. Buka **Panitia** → kartu **Beregu** → klik **Peserta (6): ubah nama, divisi, warna, pemain**.
+2. Di kolom pemain tim yang bersangkutan, ubah atau tambahkan nama, dipisahkan koma.
+   Contoh: `Agung, Eny, Arie, Tantri, Jose, Rudi`
+3. Gulir ke bawah, tekan **Simpan perubahan**.
+4. Nama baru langsung muncul di pilihan pemain di semua tablet/HP wasit.
+
+Catatan: pertandingan yang sudah selesai tetap mencatat nama yang benar-benar main saat itu. Kalau nama lama
+dihapus dari daftar setelah ia sempat main, namanya tetap muncul di **Rekap main pemain** beserta hitungan T/G-nya.
+
 ## 4. Kalau ada masalah
 
 | Masalah | Coba |
@@ -94,6 +110,7 @@ Beberapa admin boleh membuka halaman panitia bersamaan. Perubahan langsung terli
 | Masuk ke halaman "Ruang turnamen" | Buka lagi link lengkap yang ada `?k=ptmlaguna`, atau ketik `ptmlaguna` di kolom Kode ruang lalu **Masuk ke ruang ini**. |
 | Salah tekan Mulai | **Batalkan pertandingan** di halaman input skor. |
 | Skor sudah selesai tapi salah | Panitia → Pertandingan → **Ubah**. |
+| Pemain berhalangan, diganti orang lain | Lihat bagian **Mengganti pemain** di atas. |
 
 ## Catatan keamanan
 
