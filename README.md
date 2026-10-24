@@ -3,6 +3,8 @@
 Papan skor turnamen tenis meja: layar TV, input skor per meja (tablet/HP/laptop), dan halaman panitia
 (turnamen baru, undian berbasis divisi, arsip, koreksi skor).
 
+**Panduan untuk panitia PTM Laguna (6–7 November 2026): [PANDUAN_PANITIA.md](PANDUAN_PANITIA.md)**
+
 ## Versi online (GitHub Pages + Firebase)
 
 Alamat: **https://brot1994.github.io/SkorTenisMeja/**
