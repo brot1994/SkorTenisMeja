@@ -719,6 +719,18 @@ function hutTemplate(){
   var g = newWCat("double"); g.name = "Ganda Bebas"; g.fmt = { kind: "ko", G: 0, q: 0, third: true, manual: true }; W.cats.push(g);
   return W;
 }
+function ptmTemplate(){
+  var W = newWizard();
+  W.event = { title: "Kejuaraan Beregu Internal PTM Laguna", place: "Cibubur", dates: "Jumat–Sabtu, 6–7 November 2026" };
+  var c = newWCat("team"); c.name = "Beregu";
+  [["A", "#d9d9d9", "Agung,Eny,Arie,Tantri,Jose"], ["B", "#ffc000", "Carry,Tika,Puji,Dodit,Nita,Ina"], ["C", "#ed7d31", "Bram,Yogi,Aty,Wahyu,Elfi,Rita"],
+   ["D", "#ddebf7", "Ferry,Uun,Budi,Chandra,Tina"], ["E", "#c6e0b4", "James,Sunoto,Dini,John,Yuni,Vera"], ["F", "#8ea9db", "Benny,Edy,Erna,Finli,Elis"]].forEach(function(t){
+    c.entrants.push({ id: "T" + t[0], name: "Tim " + t[0], color: t[1], seed: 0, roster: t[2].split(",").map(function(n){ return { name: n, div: null }; }) });
+  });
+  c.fmt = { kind: "rr", G: 1, q: 0, third: false, manual: true };
+  W.cats.push(c);
+  return W;
+}
 function rng(seed){ var s = seed; return function(){ s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; }; }
 var NAMES = ["Siti","Rina","Dewi","Lia","Maya","Ani","Fitri","Yuni","Tari","Wati","Nur","Ika","Desi","Rara","Sari","Indah","Mega","Putri","Lina","Eka","Vina","Ayu","Nita","Tini","Ratna","Budi","Andi","Rudi","Agus","Eko","Joko","Hadi","Yoga","Dedi","Tono","Wawan","Fajar","Rizal","Bayu","Gilang","Hendra","Jaka","Lukman","Pandu","Doni","Iwan","Asep","Ujang","Dani","Rian"];
 function seedDemo(){
@@ -1993,15 +2005,15 @@ function wStep1(){
     '<div><label>Judul acara</label>' + inp("W:event.title", W.event.title, 'style="width:100%" placeholder="Turnamen Tenis Meja HUT RI ke-82"') + '</div>' +
     '<div><label>Lokasi</label>' + inp("W:event.place", W.event.place, 'style="width:100%"') + '</div>' +
     '<div><label>Tanggal</label>' + inp("W:event.dates", W.event.dates, 'style="width:100%" placeholder="17 Agustus 2027"') + '</div></div>' +
-    '<div class="row" style="margin-top:12px"><span class="small mut">Mulai dari template:</span><select id="tpl"><option value="blank">Kosong</option><option value="hut">Contoh HUT RI (5 RT beregu + ganda bebas)</option></select><button data-a="wTpl">Pakai template</button>' +
+    '<div class="row" style="margin-top:12px"><span class="small mut">Mulai dari template:</span><select id="tpl"><option value="blank">Kosong</option><option value="hut">Contoh HUT RI (5 RT beregu + ganda bebas)</option><option value="ptm">Beregu Internal PTM Laguna (6 tim, Nov 2026)</option></select><button data-a="wTpl">Pakai template</button>' +
     '<span class="small mut">Untuk menyalin turnamen lama, buka Arsip lalu tekan Duplikat.</span></div>' +
     (W.from === "dup" ? '<div class="okbox">Data disalin dari turnamen lama. Periksa tanggal, peserta, dan format sebelum membuat turnamen.</div>' : '') +
     '</div>' + wNav(false, true);
 }
 ACT.wTpl = function(){
   var v = $("#tpl").value, t = W.event;
-  W = v === "hut" ? hutTemplate() : newWizard();
-  if (v !== "hut") W.event = t;
+  W = v === "hut" ? hutTemplate() : v === "ptm" ? ptmTemplate() : newWizard();
+  if (v === "blank") W.event = t;
   drawWizard(); toast("Template dipakai");
 };
 function wStep2(){
