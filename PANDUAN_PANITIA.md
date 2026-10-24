@@ -39,10 +39,14 @@ Satu perangkat per meja: tablet, HP, atau laptop. Buka link **Input skor meja 1*
 
 **Memulai pertandingan**
 1. Saat meja kosong, muncul daftar pertandingan. Urutan teratas adalah saran sistem (sudah memperhitungkan istirahat 10 menit).
-2. Tekan **Mulai** di pertandingan yang akan dimainkan. Kalau diminta PIN, isi PIN panitia.
+2. Tekan **Mulai** di pertandingan yang akan dimainkan.
+3. Muncul form **Susunan pemain** untuk ketiga partai sekaligus. Pilih nama dari daftar pemain tiap tim:
+   Tunggal 1 (1 nama per tim), Ganda (2 nama per tim), Tunggal 2 (1 nama per tim).
+   Kalau satu pemain dipilih di dua partai tunggal, atau nama yang sama dipilih dua kali di ganda, muncul peringatan kuning.
+4. Tekan **Mulai pertandingan**. Kalau ada yang belum diisi, tombolnya menjadi **Mulai (sisanya diisi nanti)**. Kalau diminta PIN, isi PIN panitia.
 
-**Memilih pemain**
-- Di bawah tab partai (Tunggal 1 · Ganda · Tunggal 2) ada pilihan pemain.
+**Mengganti pemain di tengah pertandingan**
+- Di bawah tab partai (Tunggal 1 · Ganda · Tunggal 2) ada pilihan pemain untuk partai yang sedang berjalan.
   - Tunggal: pilih **1 nama** per tim.
   - Ganda: pilih **2 nama** per tim.
 - Setiap nama ditampilkan dengan hitungan main, misalnya `Eny (T1 G0)` = sudah 1× tunggal, belum pernah ganda.

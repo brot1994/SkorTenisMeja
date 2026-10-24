@@ -604,6 +604,7 @@ function applyOp(st, o){
       if (!m) return; ensureTables(st);
       st.tables.forEach(function(t, i){ if (t && t.cat === o.cat && t.id === o.id) st.tables[i] = null; });
       m.status = "live"; m.table = o.table; m.start = now(); m.end = 0;
+      if (o.lineup) o.lineup.forEach(function(l, i){ if (m.rub[i] && l){ m.rub[i].pa = l.pa || ""; m.rub[i].pb = l.pb || ""; } });
       st.tables[o.table - 1] = { cat: o.cat, id: o.id }; break;
     }
     case "point": {
@@ -927,8 +928,12 @@ function slug(s){ return String(s || "turnamen").toLowerCase().replace(/[^a-z0-9
 var route = "", renderQueued = false;
 function routeName(){ return (location.hash || "#").replace("#", ""); }
 function renderSoon(){ if (renderQueued) return; renderQueued = true; setTimeout(function(){ renderQueued = false; render(); }, 30); }
+var heldRender = false;
+document.addEventListener("focusout", function(){ if (heldRender){ heldRender = false; renderSoon(); } });
 function render(){
   route = routeName();
+  var ae = document.activeElement;
+  if (ae && ae.tagName === "SELECT" && (ae.getAttribute("data-lu") || ae.getAttribute("data-pl"))){ heldRender = true; return; }
   var app = $("#app");
   if (route !== "uji") ujStop();
   if (mode === "cloud" && (!CL.k || !CL.db || route === "setup")){ document.body.style.overflow = ""; return renderSetup(app); }
@@ -1543,7 +1548,8 @@ function renderWasit(app){
   if (!fixedTable()) h += '<div class="row"><span class="mut">Meja:</span>' + V.tables.map(function(_, i){
     return '<button class="' + (i + 1 === tno ? "pri" : "") + '" data-a="setTable" data-n="' + (i + 1) + '">Meja ' + (i + 1) + '</button>'; }).join("") + '</div>';
   window._cur = null;
-  if (!m) h += wasitIdle(V, tno);
+  if (!m && LU && LU.tno === tno) h += lineupHTML(V, tno);
+  else if (!m) h += wasitIdle(V, tno);
   else if (m.status === "done") h += wasitDone(V, tno, cat, m);
   else h += wasitLive(V, tno, cat, m);
   app.innerHTML = h + '</div>';
@@ -1561,9 +1567,66 @@ function wasitIdle(V, tno){
   });
   return h + '</div>';
 }
+var LU = null;
 ACT.startMatch = function(d){
   if (d.ok !== "1" && !confirm("Salah satu peserta belum selesai istirahat. Tetap mulai sekarang?")) return;
+  var V = viewState(), cat = getCat(V, d.cat), m = cat && findM(cat, d.id);
+  if (cat && m && cat.type === "team"){
+    var ea = entById(cat, m.a), eb = entById(cat, m.b);
+    if (((ea && ea.roster) || []).length || ((eb && eb.roster) || []).length){
+      LU = { cat: d.cat, id: d.id, tno: +d.t, picks: m.rub.map(function(r){ return { a: ["", ""], b: ["", ""] }; }) };
+      render(); window.scrollTo(0, 0); return;
+    }
+  }
   undoStack = []; send({ op: "start", cat: d.cat, id: d.id, table: +d.t });
+};
+function lineupHTML(V, tno){
+  var cat = getCat(V, LU.cat), m = cat && findM(cat, LU.id);
+  if (!m || m.status !== "pending"){ LU = null; return wasitIdle(V, tno); }
+  var ea = entById(cat, m.a), eb = entById(cat, m.b), ca = playerCounts(cat, m.a), cb = playerCounts(cat, m.b);
+  function names(e){ return ((e && e.roster) || []).map(function(p){ return p.name; }); }
+  function sel(team, ri, k, n, dbl){
+    var list = names(team === "a" ? ea : eb), cn = team === "a" ? ca : cb, v = LU.picks[ri][team][n];
+    return '<select data-lu="' + ri + '|' + team + '|' + n + '" style="min-width:150px"><option value="">— pilih —</option>' + list.map(function(p){
+      var c = cn[p] || { t: 0, g: 0 }, lack = dbl ? !c.g : !c.t;
+      return '<option value="' + esc(p) + '" ' + (p === v ? "selected" : "") + '>' + esc(p) + ' (T' + c.t + ' G' + c.g + ')' + (lack ? ' ★' : '') + '</option>'; }).join("") + '</select>';
+  }
+  var warn = [];
+  ["a", "b"].forEach(function(team){
+    var seenT = {}, nm = (team === "a" ? ea : eb).name;
+    m.rub.forEach(function(r, ri){
+      var dbl = isDouble(r.label), pk = LU.picks[ri][team];
+      if (dbl){ if (pk[0] && pk[0] === pk[1]) warn.push(nm + ": nama yang sama dipilih dua kali di " + r.label); }
+      else if (pk[0]){ if (seenT[pk[0]]) warn.push(nm + ": " + pk[0] + " dipilih di dua partai tunggal"); seenT[pk[0]] = 1; }
+    });
+  });
+  var filled = m.rub.every(function(r, ri){ var dbl = isDouble(r.label), pk = LU.picks[ri]; return pk.a[0] && pk.b[0] && (!dbl || (pk.a[1] && pk.b[1])); });
+  var h = '<div class="card"><h2>Susunan pemain: ' + dispName(V, cat, { name: ea.name, e: ea }, true) + ' vs ' + dispName(V, cat, { name: eb.name, e: eb }, true) + '</h2>' +
+    '<p class="small mut" style="margin-top:-4px">' + esc(cat.name) + ' · ' + esc(mLabel(V, cat, m)) + ' · Meja ' + tno + '. (T = sudah main tunggal, G = ganda, ★ = belum pernah main di partai jenis ini.) Semua pemain minimal sekali tunggal dan sekali ganda.</p>' +
+    '<div class="tscroll"><table class="lst"><tr><th>Partai</th><th>' + esc(ea.name) + '</th><th>' + esc(eb.name) + '</th></tr>';
+  m.rub.forEach(function(r, ri){
+    var dbl = isDouble(r.label);
+    h += '<tr><td><b>' + esc(r.label) + '</b></td><td>' + sel("a", ri, "a", 0, dbl) + (dbl ? ' ' + sel("a", ri, "a", 1, dbl) : '') + '</td><td>' + sel("b", ri, "b", 0, dbl) + (dbl ? ' ' + sel("b", ri, "b", 1, dbl) : '') + '</td></tr>';
+  });
+  h += '</table></div>' + (warn.length ? '<div class="warnbox">' + warn.map(esc).join("<br>") + '</div>' : '') +
+    '<div class="row" style="margin-top:10px"><button class="pri" data-a="luStart">' + (filled ? "Mulai pertandingan" : "Mulai (sisanya diisi nanti)") + '</button><button data-a="luCancel">Kembali</button>' +
+    '<span class="small mut">Pemain masih bisa diganti selama partai berjalan.</span></div></div>';
+  return h;
+}
+document.addEventListener("change", function(ev){
+  var el = ev.target; if (!el.getAttribute || !el.getAttribute("data-lu") || !LU) return;
+  var p = el.getAttribute("data-lu").split("|"); LU.picks[+p[0]][p[1]][+p[2]] = el.value; if (el.blur) el.blur(); render();
+});
+ACT.luCancel = function(){ LU = null; render(); };
+ACT.luStart = function(){
+  var V = viewState(), cat = getCat(V, LU.cat), m = findM(cat, LU.id);
+  var lineup = m.rub.map(function(r, ri){
+    var pk = LU.picks[ri], dbl = isDouble(r.label);
+    function j(x){ return dbl ? (x[0] || x[1] ? [x[0], x[1]].filter(Boolean).join(" / ") : "") : (x[0] || ""); }
+    return { pa: j(pk.a), pb: j(pk.b) };
+  });
+  var o = { op: "start", cat: LU.cat, id: LU.id, table: LU.tno, lineup: lineup };
+  LU = null; undoStack = []; send(o);
 };
 function swapped(tno){ return lsGet("tm_swap_" + tno, "0") === "1"; }
 ACT.swapSides = function(d){ lsSet("tm_swap_" + d.t, swapped(+d.t) ? "0" : "1"); render(); };
