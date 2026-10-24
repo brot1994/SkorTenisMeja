@@ -1,0 +1,998 @@
+{
+ "id": "",
+ "version": 0,
+ "status": "active",
+ "created": 1792802188977,
+ "event": {
+  "title": "Kejuaraan Beregu Internal PTM Laguna",
+  "place": "Cibubur",
+  "dates": "Jumat–Sabtu, 6–7 November 2026"
+ },
+ "settings": {
+  "tables": 2,
+  "start": "08:00",
+  "end": "17:00",
+  "restMin": 10,
+  "points": 11,
+  "winPts": 1,
+  "losePts": 0,
+  "stopEarly": true,
+  "showDiv": false,
+  "rotateSec": 15
+ },
+ "rules": {
+  "group": {
+   "bo": 3,
+   "min": 15
+  },
+  "ko": {
+   "bo": 3,
+   "min": 15
+  },
+  "sf": {
+   "bo": 3,
+   "min": 15
+  },
+  "third": {
+   "bo": 3,
+   "min": 15
+  },
+  "final": {
+   "bo": 5,
+   "min": 25
+  }
+ },
+ "cats": [
+  {
+   "id": "beregu",
+   "name": "Beregu",
+   "type": "team",
+   "tv": true,
+   "rubbers": [
+    "Tunggal 1",
+    "Ganda",
+    "Tunggal 2"
+   ],
+   "entrants": [
+    {
+     "id": "TA",
+     "name": "Tim A",
+     "color": "#d9d9d9",
+     "seed": 0,
+     "roster": [
+      {
+       "name": "Agung",
+       "div": null
+      },
+      {
+       "name": "Eny",
+       "div": null
+      },
+      {
+       "name": "Arie",
+       "div": null
+      },
+      {
+       "name": "Tantri",
+       "div": null
+      },
+      {
+       "name": "Jose",
+       "div": null
+      }
+     ]
+    },
+    {
+     "id": "TB",
+     "name": "Tim B",
+     "color": "#ffc000",
+     "seed": 0,
+     "roster": [
+      {
+       "name": "Carry",
+       "div": null
+      },
+      {
+       "name": "Tika",
+       "div": null
+      },
+      {
+       "name": "Puji",
+       "div": null
+      },
+      {
+       "name": "Dodit",
+       "div": null
+      },
+      {
+       "name": "Nita",
+       "div": null
+      },
+      {
+       "name": "Ina",
+       "div": null
+      }
+     ]
+    },
+    {
+     "id": "TC",
+     "name": "Tim C",
+     "color": "#ed7d31",
+     "seed": 0,
+     "roster": [
+      {
+       "name": "Bram",
+       "div": null
+      },
+      {
+       "name": "Yogi",
+       "div": null
+      },
+      {
+       "name": "Aty",
+       "div": null
+      },
+      {
+       "name": "Wahyu",
+       "div": null
+      },
+      {
+       "name": "Elfi",
+       "div": null
+      },
+      {
+       "name": "Rita",
+       "div": null
+      }
+     ]
+    },
+    {
+     "id": "TD",
+     "name": "Tim D",
+     "color": "#ddebf7",
+     "seed": 0,
+     "roster": [
+      {
+       "name": "Ferry",
+       "div": null
+      },
+      {
+       "name": "Uun",
+       "div": null
+      },
+      {
+       "name": "Budi",
+       "div": null
+      },
+      {
+       "name": "Chandra",
+       "div": null
+      },
+      {
+       "name": "Tina",
+       "div": null
+      }
+     ]
+    },
+    {
+     "id": "TE",
+     "name": "Tim E",
+     "color": "#c6e0b4",
+     "seed": 0,
+     "roster": [
+      {
+       "name": "James",
+       "div": null
+      },
+      {
+       "name": "Sunoto",
+       "div": null
+      },
+      {
+       "name": "Dini",
+       "div": null
+      },
+      {
+       "name": "John",
+       "div": null
+      },
+      {
+       "name": "Yuni",
+       "div": null
+      },
+      {
+       "name": "Vera",
+       "div": null
+      }
+     ]
+    },
+    {
+     "id": "TF",
+     "name": "Tim F",
+     "color": "#8ea9db",
+     "seed": 0,
+     "roster": [
+      {
+       "name": "Benny",
+       "div": null
+      },
+      {
+       "name": "Edy",
+       "div": null
+      },
+      {
+       "name": "Erna",
+       "div": null
+      },
+      {
+       "name": "Finli",
+       "div": null
+      },
+      {
+       "name": "Elis",
+       "div": null
+      }
+     ]
+    }
+   ],
+   "kind": "rr",
+   "q": 0,
+   "thirdPlace": false,
+   "groups": [
+    {
+     "id": "A",
+     "ids": [
+      "TA",
+      "TB",
+      "TC",
+      "TD",
+      "TE",
+      "TF"
+     ]
+    }
+   ],
+   "slots": [],
+   "matches": [
+    {
+     "id": "beregu-A-1",
+     "stage": "group",
+     "group": "A",
+     "round": 1,
+     "a": "TA",
+     "b": "TF",
+     "bo": 3,
+     "status": "pending",
+     "table": 0,
+     "start": 0,
+     "end": 0,
+     "rub": [
+      {
+       "label": "Tunggal 1",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      },
+      {
+       "label": "Ganda",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      },
+      {
+       "label": "Tunggal 2",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      }
+     ],
+     "win": null
+    },
+    {
+     "id": "beregu-A-2",
+     "stage": "group",
+     "group": "A",
+     "round": 1,
+     "a": "TE",
+     "b": "TB",
+     "bo": 3,
+     "status": "pending",
+     "table": 0,
+     "start": 0,
+     "end": 0,
+     "rub": [
+      {
+       "label": "Tunggal 1",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      },
+      {
+       "label": "Ganda",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      },
+      {
+       "label": "Tunggal 2",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      }
+     ],
+     "win": null
+    },
+    {
+     "id": "beregu-A-3",
+     "stage": "group",
+     "group": "A",
+     "round": 1,
+     "a": "TC",
+     "b": "TD",
+     "bo": 3,
+     "status": "pending",
+     "table": 0,
+     "start": 0,
+     "end": 0,
+     "rub": [
+      {
+       "label": "Tunggal 1",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      },
+      {
+       "label": "Ganda",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      },
+      {
+       "label": "Tunggal 2",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      }
+     ],
+     "win": null
+    },
+    {
+     "id": "beregu-A-4",
+     "stage": "group",
+     "group": "A",
+     "round": 2,
+     "a": "TE",
+     "b": "TA",
+     "bo": 3,
+     "status": "pending",
+     "table": 0,
+     "start": 0,
+     "end": 0,
+     "rub": [
+      {
+       "label": "Tunggal 1",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      },
+      {
+       "label": "Ganda",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      },
+      {
+       "label": "Tunggal 2",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      }
+     ],
+     "win": null
+    },
+    {
+     "id": "beregu-A-5",
+     "stage": "group",
+     "group": "A",
+     "round": 2,
+     "a": "TF",
+     "b": "TD",
+     "bo": 3,
+     "status": "pending",
+     "table": 0,
+     "start": 0,
+     "end": 0,
+     "rub": [
+      {
+       "label": "Tunggal 1",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      },
+      {
+       "label": "Ganda",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      },
+      {
+       "label": "Tunggal 2",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      }
+     ],
+     "win": null
+    },
+    {
+     "id": "beregu-A-6",
+     "stage": "group",
+     "group": "A",
+     "round": 2,
+     "a": "TC",
+     "b": "TB",
+     "bo": 3,
+     "status": "pending",
+     "table": 0,
+     "start": 0,
+     "end": 0,
+     "rub": [
+      {
+       "label": "Tunggal 1",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      },
+      {
+       "label": "Ganda",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      },
+      {
+       "label": "Tunggal 2",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      }
+     ],
+     "win": null
+    },
+    {
+     "id": "beregu-A-7",
+     "stage": "group",
+     "group": "A",
+     "round": 3,
+     "a": "TA",
+     "b": "TD",
+     "bo": 3,
+     "status": "pending",
+     "table": 0,
+     "start": 0,
+     "end": 0,
+     "rub": [
+      {
+       "label": "Tunggal 1",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      },
+      {
+       "label": "Ganda",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      },
+      {
+       "label": "Tunggal 2",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      }
+     ],
+     "win": null
+    },
+    {
+     "id": "beregu-A-8",
+     "stage": "group",
+     "group": "A",
+     "round": 3,
+     "a": "TC",
+     "b": "TE",
+     "bo": 3,
+     "status": "pending",
+     "table": 0,
+     "start": 0,
+     "end": 0,
+     "rub": [
+      {
+       "label": "Tunggal 1",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      },
+      {
+       "label": "Ganda",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      },
+      {
+       "label": "Tunggal 2",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      }
+     ],
+     "win": null
+    },
+    {
+     "id": "beregu-A-9",
+     "stage": "group",
+     "group": "A",
+     "round": 3,
+     "a": "TF",
+     "b": "TB",
+     "bo": 3,
+     "status": "pending",
+     "table": 0,
+     "start": 0,
+     "end": 0,
+     "rub": [
+      {
+       "label": "Tunggal 1",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      },
+      {
+       "label": "Ganda",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      },
+      {
+       "label": "Tunggal 2",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      }
+     ],
+     "win": null
+    },
+    {
+     "id": "beregu-A-10",
+     "stage": "group",
+     "group": "A",
+     "round": 4,
+     "a": "TC",
+     "b": "TA",
+     "bo": 3,
+     "status": "pending",
+     "table": 0,
+     "start": 0,
+     "end": 0,
+     "rub": [
+      {
+       "label": "Tunggal 1",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      },
+      {
+       "label": "Ganda",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      },
+      {
+       "label": "Tunggal 2",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      }
+     ],
+     "win": null
+    },
+    {
+     "id": "beregu-A-11",
+     "stage": "group",
+     "group": "A",
+     "round": 4,
+     "a": "TD",
+     "b": "TB",
+     "bo": 3,
+     "status": "pending",
+     "table": 0,
+     "start": 0,
+     "end": 0,
+     "rub": [
+      {
+       "label": "Tunggal 1",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      },
+      {
+       "label": "Ganda",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      },
+      {
+       "label": "Tunggal 2",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      }
+     ],
+     "win": null
+    },
+    {
+     "id": "beregu-A-12",
+     "stage": "group",
+     "group": "A",
+     "round": 4,
+     "a": "TF",
+     "b": "TE",
+     "bo": 3,
+     "status": "pending",
+     "table": 0,
+     "start": 0,
+     "end": 0,
+     "rub": [
+      {
+       "label": "Tunggal 1",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      },
+      {
+       "label": "Ganda",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      },
+      {
+       "label": "Tunggal 2",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      }
+     ],
+     "win": null
+    },
+    {
+     "id": "beregu-A-13",
+     "stage": "group",
+     "group": "A",
+     "round": 5,
+     "a": "TA",
+     "b": "TB",
+     "bo": 3,
+     "status": "pending",
+     "table": 0,
+     "start": 0,
+     "end": 0,
+     "rub": [
+      {
+       "label": "Tunggal 1",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      },
+      {
+       "label": "Ganda",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      },
+      {
+       "label": "Tunggal 2",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      }
+     ],
+     "win": null
+    },
+    {
+     "id": "beregu-A-14",
+     "stage": "group",
+     "group": "A",
+     "round": 5,
+     "a": "TF",
+     "b": "TC",
+     "bo": 3,
+     "status": "pending",
+     "table": 0,
+     "start": 0,
+     "end": 0,
+     "rub": [
+      {
+       "label": "Tunggal 1",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      },
+      {
+       "label": "Ganda",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      },
+      {
+       "label": "Tunggal 2",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      }
+     ],
+     "win": null
+    },
+    {
+     "id": "beregu-A-15",
+     "stage": "group",
+     "group": "A",
+     "round": 5,
+     "a": "TD",
+     "b": "TE",
+     "bo": 3,
+     "status": "pending",
+     "table": 0,
+     "start": 0,
+     "end": 0,
+     "rub": [
+      {
+       "label": "Tunggal 1",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      },
+      {
+       "label": "Ganda",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      },
+      {
+       "label": "Tunggal 2",
+       "pa": "",
+       "pb": "",
+       "sets": [],
+       "cur": [
+        0,
+        0
+       ],
+       "win": null
+      }
+     ],
+     "win": null
+    }
+   ]
+  }
+ ],
+ "tables": [
+  null,
+  null
+ ]
+}

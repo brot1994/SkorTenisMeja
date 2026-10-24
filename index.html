@@ -1583,17 +1583,53 @@ function wasitLive(V, tno, cat, m){
   window._cur = { cat: cat.id, id: m.id, tno: tno, order: order, live: true };
   return h;
 }
+function playerCounts(cat, entId){
+  var e = entById(cat, entId), out = {};
+  ((e && e.roster) || []).forEach(function(p){ out[p.name] = { t: 0, g: 0 }; });
+  cat.matches.forEach(function(m){
+    if (m.stage !== "group" && m.stage !== "ko") return;
+    var sideK = m.a === entId ? "pa" : m.b === entId ? "pb" : null; if (!sideK) return;
+    m.rub.forEach(function(r){
+      if (!r.sets.length && !r.win && !(r.cur[0] || r.cur[1])) return;
+      String(r[sideK] || "").split(" / ").map(function(x){ return x.trim(); }).filter(Boolean).forEach(function(n){
+        if (!out[n]) out[n] = { t: 0, g: 0 };
+        if (isDouble(r.label)) out[n].g++; else out[n].t++;
+      });
+    });
+  });
+  return out;
+}
+function rekapHTML(V){
+  var cats = V.cats.filter(function(c){ return c.type === "team" && c.entrants.some(function(e){ return (e.roster || []).length; }); });
+  if (!cats.length) return "";
+  var h = '<div class="card"><h2>Rekap main pemain</h2><p class="small mut">T = berapa kali main tunggal, G = ganda (dihitung dari partai yang sudah dimainkan). Merah = belum pernah. Aturan: setiap pemain minimal sekali tunggal dan sekali ganda.</p>';
+  cats.forEach(function(cat){
+    h += '<h3 style="margin-top:10px">' + esc(cat.name) + '</h3><div class="gcards">';
+    cat.entrants.forEach(function(e){
+      var cnt = playerCounts(cat, e.id), left = cat.matches.filter(function(m){ return m.status !== "done" && (m.a === e.id || m.b === e.id); }).length;
+      var need = Object.keys(cnt).filter(function(n){ return !cnt[n].t || !cnt[n].g; }).length;
+      h += '<div class="gcard"><h4><span>' + esc(e.name) + '</span><span class="small mut">sisa ' + left + ' pertandingan</span></h4>' +
+        Object.keys(cnt).map(function(n){ var c = cnt[n];
+          return '<div class="ent" style="cursor:default"><span>' + esc(n) + '</span><span class="s"><b style="color:' + (c.t ? "var(--ok)" : "var(--bad)") + '">T' + c.t + '</b> · <b style="color:' + (c.g ? "var(--ok)" : "var(--bad)") + '">G' + c.g + '</b></span></div>'; }).join("") +
+        (need && left === 0 ? '<div class="warnbox small" style="margin:6px 0 0">' + need + ' pemain belum memenuhi aturan</div>' : '') + '</div>';
+    });
+    h += '</div>';
+  });
+  return h + '</div>';
+}
 function playersHTML(V, cat, m, ai, r){
   if (cat.type !== "team") return "";
   var ea = entById(cat, m.a), eb = entById(cat, m.b), ra = (ea && ea.roster || []).map(function(p){ return p.name; }), rb = (eb && eb.roster || []).map(function(p){ return p.name; });
   if (!ra.length && !rb.length) return "";
-  var dbl = isDouble(r.label);
+  var dbl = isDouble(r.label), ca = playerCounts(cat, m.a), cb = playerCounts(cat, m.b);
   function sel(list, val, k, n){
-    var v = (val || "").split(" / ")[n] || "";
-    return '<select data-pl="1" data-k="' + k + '" data-n="' + n + '" data-dbl="' + (dbl ? 1 : 0) + '"><option value="">— pemain —</option>' + list.map(function(p){ return '<option ' + (p === v ? "selected" : "") + '>' + esc(p) + '</option>'; }).join("") + '</select>';
+    var v = (val || "").split(" / ")[n] || "", cn = k === "a" ? ca : cb;
+    return '<select data-pl="1" data-k="' + k + '" data-n="' + n + '" data-dbl="' + (dbl ? 1 : 0) + '"><option value="">— pemain —</option>' + list.map(function(p){
+      var c = cn[p] || { t: 0, g: 0 }, lack = dbl ? !c.g : !c.t;
+      return '<option value="' + esc(p) + '" ' + (p === v ? "selected" : "") + '>' + esc(p) + ' (T' + c.t + ' G' + c.g + ')' + (lack ? ' ★' : '') + '</option>'; }).join("") + '</select>';
   }
   return '<div class="row small" style="margin:8px 0"><span class="mut">' + esc(r.label) + ':</span><span>' + esc(ea ? ea.name : "") + '</span>' + sel(ra, r.pa, "a", 0) + (dbl ? sel(ra, r.pa, "a", 1) : "") +
-    '<span>vs ' + esc(eb ? eb.name : "") + '</span>' + sel(rb, r.pb, "b", 0) + (dbl ? sel(rb, r.pb, "b", 1) : "") + '</div>';
+    '<span>vs ' + esc(eb ? eb.name : "") + '</span>' + sel(rb, r.pb, "b", 0) + (dbl ? sel(rb, r.pb, "b", 1) : "") + '<span class="mut">★ = belum pernah main ' + (dbl ? "ganda" : "tunggal") + '</span></div>';
 }
 document.addEventListener("change", function(ev){
   var el = ev.target; if (!el.getAttribute || !el.getAttribute("data-pl")) return;
@@ -1659,16 +1695,18 @@ function renderPanitia(app){
 function renderAdmin(app){
   if (!hasT()){
     adminBuilt = false;
-    app.innerHTML = topbar("Panitia") + '<div class="wrap">' + panitiaTabs() + '<div class="card"><h2>Belum ada turnamen aktif</h2><p class="mut">Buat turnamen baru, atau aktifkan turnamen dari arsip.</p><div class="row"><a href="#baru"><button class="pri">+ Turnamen baru</button></a><a href="#arsip"><button>Buka arsip</button></a></div></div></div>';
+    app.innerHTML = topbar("Panitia") + '<div class="wrap">' + panitiaTabs() + '<div class="card"><h2>Belum ada turnamen aktif</h2><p class="mut">Buat turnamen baru, atau aktifkan turnamen dari arsip.</p><div class="row"><a href="#baru"><button class="pri">+ Turnamen baru</button></a><a href="#arsip"><button>Buka arsip</button></a></div>' +
+      '<div class="row" style="margin-top:6px"><label class="ck"><span style="margin-right:8px">Atau buka file turnamen / backup (.json):</span><input type="file" id="impf" accept=".json,application/json" style="width:auto;height:auto"></label></div></div></div>';
+    $("#impf").addEventListener("change", function(){ importJSON(this); });
     return;
   }
   var V = viewState();
   if (!adminBuilt || !A || A.id !== V.id){
     A = { id: V.id, event: clone(V.event), settings: clone(V.settings), rules: clone(V.rules), cats: V.cats.map(function(c){ return { id: c.id, name: c.name, tv: c.tv, type: c.type, entrants: clone(c.entrants) }; }) };
-    app.innerHTML = topbar("Panitia") + '<div class="wrap">' + panitiaTabs() + '<div id="ahead"></div><div id="cfg"></div><div id="mlist"></div><div id="bk"></div></div>';
+    app.innerHTML = topbar("Panitia") + '<div class="wrap">' + panitiaTabs() + '<div id="ahead"></div><div id="rekap"></div><div id="cfg"></div><div id="mlist"></div><div id="bk"></div></div>';
     drawCfg(); adminBuilt = true;
   } else { var tb = document.querySelector(".topbar"); if (tb) tb.outerHTML = topbar("Panitia"); }
-  drawHead(V); drawMatches(V); drawBackup(V);
+  drawHead(V); var rk = $("#rekap"); if (rk) rk.innerHTML = rekapHTML(V); drawMatches(V); drawBackup(V);
 }
 function drawHead(V){
   var el = $("#ahead"); if (!el) return;
